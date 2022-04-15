@@ -1,16 +1,16 @@
 #include "main.h"
-
 /**
- *main - tests func
- *Return: 0
+ * main - main
+ * Return: 0
  */
 
 int main(void)
 {
-	int i;
+int i;
+i = 0;
 
-        i = 0;
-        positive_or_negative(i);
+positive_or_negative(i);
 
-        return (0);
+return (0);
+
 }
