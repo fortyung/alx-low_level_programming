@@ -2,7 +2,6 @@
 /**
  *print_line - draws a straight line
  *@n: print int
- *Return: Always 0.
  */
 
 void print_line(int n)
