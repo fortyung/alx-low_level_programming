@@ -1,9 +1,10 @@
 #include "main.h"
 
-/*_strcat - concatenate two strings
- *@dest: string to be appened 
- *@src: sorce
- *Return: returns dest
+/**
+ *_strcat - concatenates two strings
+ *@dest: A pointer to a character that will be changed
+ *@src: A pointer to a character that will also be changed
+ *Return: dest
  */
 
 char *_strcat(char *dest, char *src)
@@ -13,7 +14,7 @@ char *_strcat(char *dest, char *src)
 
 	while (dest[i] != '\0')
 		i++;
-	
+
 	while (src[j] != '\0')
 	{
 		dest[i] = src[j];
