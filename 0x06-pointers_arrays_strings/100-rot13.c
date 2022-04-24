@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "main.h"
 
 /**
  * rot13 - encode string using rot13
@@ -22,13 +22,13 @@ char *rot13(char *s)
 
 	int i, j;
 
-	for (j = 0; s[j] != '\0'; j++) /*loop through string*/
+	for (j = 0; s[j] != '\0'; j++) 
 	{
 		i = 0;
-		while (a[i] != '\0' && s[j] != a[i]) /*loop through rot13 arr*/
+		while (a[i] != '\0' && s[j] != a[i])
 			i++;
 
-		if (s[j] == a[i]) /*if alpha matches, set to index in b arr*/
+		if (s[j] == a[i])
 			s[j] = b[i];
 	}
 
