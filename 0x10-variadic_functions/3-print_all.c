@@ -1,85 +1,52 @@
 #include "variadic_functions.h"
-#include <stdlib.h>
+#include <stdarg.h>
 #include <stdio.h>
-
 /**
- * print_int - prints int
- * @list: arguments from print_all
+ * print_all - prints anything
+ * @format: types of arguments passed to the function
+ * c: char
+ * i: integer
+ * f: float
+ * s: char * (if the string is NULL, print (nil) instead
+ * any other char should be ignored
  */
-void print_int(va_list list)
-{
-	printf("%d", va_arg(list, int));
-}
-
-/**
- * print_float - prints float
- * @list: arguments from print_all
- */
-void print_float(va_list list)
-{
-	printf("%f", va_arg(list, double));
-}
-
-/**
- * print_char - prints int
- * @list: arguments from print_all
- */
-void print_char(va_list list)
-{
-	printf("%c", va_arg(list, int));
-}
-
-/**
- * print_str - prints string
- * @list: arguments from print_all
- */
-void print_str(va_list list)
-{
-	char *s = va_arg(list, char *);
-
-	s == NULL ? printf("(nil)") : printf("%s", s);
-
-}
-
-/**
- * print_all - prints any type
- * @format: arguments to print
- */
-
 void print_all(const char * const format, ...)
 {
-va_list list;
-int i = 0, j = 0;
-char *sep = "";
+	int i = 0, j = 0;
+	char *s, op;
+	va_list ap;
 
-printTypeStruct printType[] = {
-	{ "i", print_int },
-	{ "f", print_float },
-	{ "c", print_char },
-	{ "s", print_str },
-	{NULL, NULL}
-};
-
-
-va_start(list, format);
-
-while (format && format[i])
-{
-	j = 0;
-	while (j < 4)
+	va_start(ap, format);
+	while (format && format[i])
 	{
-		if (*printType[j].type == format[i])
+		op = format[i + 1];
+		switch (format[i])
 		{
-			printf("%s", sep);
-			printType[j].printer(list);
-			sep = ", ";
-			break;
+			case 'c':
+				printf("%c", va_arg(ap, int));
+				j = 1;
+				break;
+			case 'i':
+				printf("%i", va_arg(ap, int));
+				j = 1;
+				break;
+			case 'f':
+				printf("%f", va_arg(ap, double));
+				j = 1;
+				break;
+			case 's':
+				s = va_arg(ap, char *);
+				j = 1;
+				if (s == NULL)
+					printf("(nil)");
+				printf("%s", s);
+				j = 1;
+				break;
 		}
-		j++;
+		if (j > 0 && (op == 'c' || op == 'i' || op == 'f' || op == 's'))
+			printf(", ");
+		i++;
 	}
-	i++;
-}
-
-printf("\n");
-va_end(list);
+	printf("\n");
+	va_end(ap);
 }
